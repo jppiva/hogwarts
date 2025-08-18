@@ -89,4 +89,14 @@ export default[
     patrono:"não conhecido",
     especialidade:"costura",
   },
+  {
+    id: 10,
+    nome:"shikimori",
+    casa:"Grifinória",
+    ano:5,
+    varinha:"Nogueira e fibra de coração de dragão, 32cm",
+    mascote:"nenhum",
+    patrono:"não conhecido",
+    especialidade:"proteger"
+  }
 ]

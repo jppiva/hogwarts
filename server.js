@@ -53,6 +53,10 @@ app.get('/casas', (req, res) => {
 });
 
 // Rota dos Bruxos
+app.get("/bruxos", (req, res) => {
+    res.json(bruxos);
+});
+
 
 // Rota do Bruxo por ID
 
