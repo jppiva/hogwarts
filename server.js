@@ -92,6 +92,10 @@ app.get("/bruxos/casa/:casa",(req,res) => {
   let casa = req.httpVersionMajor.casa;
   const casaEncontradas =bruxos.filter(b =>b.casa.toLowerCase() === casa.toLowerCase());
   if(casaEncontradas.length > 0){
-    
+    res.status(200).json(casaEncontradas);
+  }else{
+    res.status(404).json({
+      mensage:"casa não encontrada"
+    })
   }
 })
