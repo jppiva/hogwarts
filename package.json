@@ -1,0 +1,17 @@
+{
+  "name": "bruxos",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cls && nodemon server.js"
+  },
+  "keywords": ["Bruxos"],
+  "author": "",
+  "license": "MIT",
+  "description": "Atividade do Hogwarts",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
