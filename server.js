@@ -65,3 +65,33 @@ app.listen(serverPort, () => {
   console.log(`⚡ Servidor Hogwarts iniciado em: http://localhost:${serverPort}`);
   console.log(`🏰 Pronto para receber novos bruxos!`);
 });
+app.get("/bruxos:id",(req , res) => {
+  let id = req.params.id;
+  id=parseInt(id)
+  const bruxos = bruxos.find(b => b.id === id);
+  if(bruxos){
+    res.status(200).json(bruxos);
+  }else{
+    res.status(404).json({
+      mansagem:"bruxo não encontrado"
+    })
+  }
+})
+app.get("/bruxos/nome/:nome",(req,res) => {
+  let nome = req.params.toLowerCase();
+  const bruxoEncontrados = bruxos.filter(b => b.nome.toLowerCase().includes(nome));
+  if(bruxoEncontrados.length > 0 ){
+    res.status(200).json(bruxoEncontrados);
+  }else{
+    res.status(404).json({
+      mensage: "bruxos não encontrados"
+    })
+  }
+});
+app.get("/bruxos/casa/:casa",(req,res) => {
+  let casa = req.httpVersionMajor.casa;
+  const casaEncontradas =bruxos.filter(b =>b.casa.toLowerCase() === casa.toLowerCase());
+  if(casaEncontradas.length > 0){
+    
+  }
+})
