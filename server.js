@@ -65,37 +65,36 @@ app.listen(serverPort, () => {
   console.log(`⚡ Servidor Hogwarts iniciado em: http://localhost:${serverPort}`);
   console.log(`🏰 Pronto para receber novos bruxos!`);
 });
-app.get("/bruxos:id",(req , res) => {
-  let id = req.params.id;
-  id=parseInt(id)
-  const bruxos = bruxos.find(b => b.id === id);
-  if(bruxos){
-    res.status(200).json(bruxos);
-  }else{
-    res.status(404).json({
-      mansagem:"bruxo não encontrado"
-    })
-  }
-})
-app.get("/bruxos/nome/:nome",(req,res) => {
-  let nome = req.params.toLowerCase();
+app.get("/bruxos/nome/:nome", (req, res) => {
+  let nome = req.params.nome.toLowerCase();
   const bruxoEncontrados = bruxos.filter(b => b.nome.toLowerCase().includes(nome));
-  if(bruxoEncontrados.length > 0 ){
+  if (bruxoEncontrados.length > 0) {
     res.status(200).json(bruxoEncontrados);
-  }else{
+  } else {
     res.status(404).json({
-      mensage: "bruxos não encontrados"
-    })
+     "mensagem": "bruxo não encontrados"
+    });
   }
 });
-app.get("/bruxos/casa/:casa",(req,res) => {
-  let casa = req.httpVersionMajor.casa;
-  const casaEncontradas =bruxos.filter(b =>b.casa.toLowerCase() === casa.toLowerCase());
-  if(casaEncontradas.length > 0){
-    res.status(200).json(casaEncontradas);
-  }else{
+app.get("/bruxos/casa/:casa", (req, res) => {
+  let reino = req.params.reino.toLowerCase();
+  const casaEncontrados = bruxos.filter(b => b.casa.toLowerCase().includes(casa));
+  if (casaEncontrados.length > 0) {
+    res.status(200).json(casaEncontrados);
+  } else {
     res.status(404).json({
-      mensage:"casa não encontrada"
-    })
+      "mensagem": "casa não encontrados"
+    });
   }
-})
+});
+app.get("/bruxos/:id", (req, res) => {
+    let id = parseInt(req.params.id);
+    const idEncontrada = bruxos.find(p => p.id === id);
+    if (idEncontrada) {
+      res.status(200).json(idEncontrada);
+    } else {
+      res.status(404).json({
+        "mensagem": "bruxo não encontrado"
+      })
+    }
+  });
