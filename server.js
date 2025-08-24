@@ -77,7 +77,7 @@ app.get("/bruxos/nome/:nome", (req, res) => {
   }
 });
 app.get("/bruxos/casa/:casa", (req, res) => {
-  let reino = req.params.reino.toLowerCase();
+  let casa = req.params.casa.toLowerCase();
   const casaEncontrados = bruxos.filter(b => b.casa.toLowerCase().includes(casa));
   if (casaEncontrados.length > 0) {
     res.status(200).json(casaEncontrados);
