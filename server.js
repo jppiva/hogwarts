@@ -1,9 +1,10 @@
 import express from "express";
 import bruxos from "./src/data/bruxos.js";
+import dados from "./src/data/dados.js";
 
 const serverPort = 3000;
 const app = express();
-
+const {varinhas,animais,pocoes,casas} = dados
 app.use(express.json());
 
 // Rota principal - Hogwarts
@@ -87,6 +88,17 @@ app.get("/bruxos/casa/:casa", (req, res) => {
     });
   }
 });
+app.get("/bruxos/varinha/:varinha", (req, res) => {
+  let varinha = req.params.varinha.toLowerCase();
+  const varinhaEncontrados = bruxos.filter(b => b.varinha.toLowerCase().includes(varinha));
+  if (varinhaEncontrados.length > 0) {
+    res.status(200).json(varinhaEncontrados);
+  } else {
+    res.status(404).json({
+      "mensagem": "varinha não encontrados"
+    });
+  }
+});
 app.get("/bruxos/:id", (req, res) => {
     let id = parseInt(req.params.id);
     const idEncontrada = bruxos.find(p => p.id === id);
@@ -98,3 +110,61 @@ app.get("/bruxos/:id", (req, res) => {
       })
     }
   });
+  app.get("/varinhas", (req, res) => {
+    res.json(varinhas);
+    if(varinhas.length > 0){
+      res.status(200).json(varinhas);
+    }else{
+      res.status(404).json({
+        "mensagem":"varinha não encontradas"
+      })
+    }
+  });
+  app.get("/pocoes", (req, res) => {
+    res.json(pocoes);
+    if(varinhas.length > 0){
+      res.status(200).json(pocoes);
+    }else{
+      res.status(404).json({
+        "mensagem":"poções não encontradas"
+      })
+    }
+  });
+  app.get("/animais", (req, res) => {
+    res.json(animais);
+  });
+
+  app.get("/varinhas/:id", (req, res) => {
+    let id = parseInt(req.params.id);
+    const varinhaEncontrada = varinhas.find(p => p.id === id);
+    if (varinhaEncontrada) {
+      res.status(200).json(varinhaEncontrada);
+    } else {
+      res.status(404).json({
+        "mensagem": "varinha não encontrado"
+      })
+    }
+  });
+  app.get("/animais/:id", (req, res) => {
+    let id = parseInt(req.params.id);
+    const animalEncontrado = animais.find(p => p.id === id);
+    if (animalEncontrado) {
+      res.status(200).json(animalEncontrado);
+    } else {
+      res.status(404).json({
+        "mensagem": "animal não encontrado"
+      })
+    }
+  });
+  app.get("/casas/:id", (req, res) => {
+    let id = parseInt(req.params.id);
+    const casaEncontrada = casas.find(p => p.id === id);
+    if (casaEncontrada) {
+      res.status(200).json(casaEncontrada);
+    } else {
+      res.status(404).json({
+        "mensagem": "casa não encontrado"
+      })
+    }
+  });
+  
